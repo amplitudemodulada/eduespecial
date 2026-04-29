@@ -11,9 +11,9 @@ const STORAGE_KEYS = {
 }
 
 const demoUsers: User[] = [
-  { id: '1', email: 'admin@escola.com', password: '123456', role: 'admin', nome: 'Administrador', created_at: new Date().toISOString() },
-  { id: '2', email: 'professor@escola.com', password: '123456', role: 'professor', nome: 'Professor', created_at: new Date().toISOString() },
-  { id: '3', email: 'demo@escola.com', password: '123456', role: 'demo', nome: 'Demo', created_at: new Date().toISOString() }
+  { id: '1', email: 'admin@escola.com', role: 'admin', nome: 'Administrador', created_at: new Date().toISOString() },
+  { id: '2', email: 'professor@escola.com', role: 'professor', nome: 'Professor', created_at: new Date().toISOString() },
+  { id: '3', email: 'demo@escola.com', role: 'demo', nome: 'Demo', created_at: new Date().toISOString() }
 ]
 
 export function initDemoData() {
