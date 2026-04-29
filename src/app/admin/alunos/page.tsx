@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase'
+import { getAlunos, saveAluno, deleteAluno, initDemoData } from '@/lib/demo'
 
 interface Aluno {
   id: string
@@ -74,18 +74,14 @@ export default function AlunosPage() {
       router.push('/login')
       return
     }
+    initDemoData()
     fetchAlunos()
   }, [])
 
-  const fetchAlunos = async () => {
+  const fetchAlunos = () => {
     try {
-      const { data, error } = await supabase
-        .from('alunos')
-        .select('*')
-        .order('nome')
-
-      if (error) throw error
-      setAlunos(data || [])
+      const data = getAlunos()
+      setAlunos(data)
     } catch (err) {
       console.error('Erro ao buscar alunos:', err)
     } finally {
@@ -97,21 +93,7 @@ export default function AlunosPage() {
     e.preventDefault()
     
     try {
-      if (editingId) {
-        const { error } = await supabase
-          .from('alunos')
-          .update({ ...form, updated_at: new Date().toISOString() })
-          .eq('id', editingId)
-        
-        if (error) throw error
-      } else {
-        const { error } = await supabase
-          .from('alunos')
-          .insert(form)
-        
-        if (error) throw error
-      }
-
+      saveAluno(form)
       setShowModal(false)
       resetForm()
       fetchAlunos()
@@ -150,36 +132,10 @@ export default function AlunosPage() {
     setShowModal(true)
   }
 
-  const deleteAluno = async (id: string) => {
+  const removeAluno = (id: string) => {
     if (!confirm('Tem certeza que deseja excluir este aluno?')) return
-
-    try {
-      const { error } = await supabase
-        .from('alunos')
-        .delete()
-        .eq('id', id)
-
-      if (error) throw error
-      fetchAlunos()
-    } catch (err) {
-      console.error('Erro ao excluir:', err)
-    }
-  }
-
-  const toggleStatus = async (aluno: Aluno) => {
-    const newStatus = aluno.status === 'ativo' ? 'inativo' : 'ativo'
-    
-    try {
-      const { error } = await supabase
-        .from('alunos')
-        .update({ status: newStatus, updated_at: new Date().toISOString() })
-        .eq('id', aluno.id)
-
-      if (error) throw error
-      fetchAlunos()
-    } catch (err) {
-      console.error('Erro ao atualizar status:', err)
-    }
+    deleteAluno(id)
+    fetchAlunos()
   }
 
   const filteredAlunos = alunos.filter(aluno => {
@@ -256,13 +212,7 @@ export default function AlunosPage() {
                     </button>
                     <button 
                       className="btn btn-ghost text-sm text-danger" 
-                      onClick={() => toggleStatus(aluno)}
-                    >
-                      {aluno.status === 'ativo' ? 'Inativar' : 'Ativar'}
-                    </button>
-                    <button 
-                      className="btn btn-ghost text-sm text-danger" 
-                      onClick={() => deleteAluno(aluno.id)}
+                      onClick={() => removeAluno(aluno.id)}
                     >
                       Excluir
                     </button>

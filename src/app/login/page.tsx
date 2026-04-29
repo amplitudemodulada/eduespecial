@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase'
+import { login, initDemoData } from '@/lib/demo'
 import './login.css'
 
 export default function LoginPage() {
@@ -13,39 +13,34 @@ export default function LoginPage() {
 
   const router = useRouter()
 
+  useEffect(() => {
+    initDemoData()
+  }, [])
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setError('')
 
-    try {
-      const { data, error: authError } = await supabase
-        .from('users')
-        .select('*')
-        .eq('email', email)
-        .eq('password', password)
-        .single()
+    const user = login(email, password)
 
-      if (authError || !data) {
-        setError('Email ou senha incorretos')
-        return
-      }
-
-      sessionStorage.setItem('user', JSON.stringify(data))
-      
-      if (data.role === 'admin') {
-        router.push('/admin/alunos')
-      } else if (data.role === 'professor') {
-        router.push('/professor/frequencia')
-      } else if (data.role === 'responsavel') {
-        router.push('/responsavel')
-      } else if (data.role === 'demo') {
-        router.push('/demo')
-      }
-    } catch (err) {
-      setError('Erro ao fazer login')
-    } finally {
+    if (!user) {
+      setError('Email ou senha incorretos')
       setLoading(false)
+      return
+    }
+
+    sessionStorage.setItem('user', JSON.stringify(user))
+    setLoading(false)
+
+    if (user.role === 'admin') {
+      router.push('/admin/alunos')
+    } else if (user.role === 'professor') {
+      router.push('/professor/frequencia')
+    } else if (user.role === 'responsavel') {
+      router.push('/responsavel')
+    } else if (user.role === 'demo') {
+      router.push('/demo')
     }
   }
 
@@ -67,7 +62,7 @@ export default function LoginPage() {
               className="input"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="seu@email.com"
+              placeholder="admin@escola.com"
               required
             />
           </div>
@@ -79,7 +74,7 @@ export default function LoginPage() {
               className="input"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
+              placeholder="123456"
               required
             />
           </div>
@@ -88,6 +83,13 @@ export default function LoginPage() {
             {loading ? 'Entrando...' : 'Entrar'}
           </button>
         </form>
+
+        <div className="login-footer">
+          <p><strong>Contas demo:</strong></p>
+          <p>admin@escola.com / 123456</p>
+          <p>professor@escola.com / 123456</p>
+          <p>demo@escola.com / 123456</p>
+        </div>
       </div>
     </div>
   )
