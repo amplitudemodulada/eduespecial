@@ -238,6 +238,19 @@
 
 .login-footer-note span { font-size: 1.25rem; }
 
+.login-legal {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+  font-size: 0.72rem;
+  color: #9ca3af;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.login-legal strong { color: #6b7280; }
+.login-legal abbr   { text-decoration: underline dotted; cursor: help; }
+
 /* ── Responsivo ── */
 @media (max-width: 768px) {
   .login-page { flex-direction: column; }

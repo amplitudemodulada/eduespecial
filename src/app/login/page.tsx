@@ -118,6 +118,16 @@ export default function LoginPage() {
             Acesso restrito a usuários autorizados pela escola
           </div>
         </div>
+
+        <div className="login-legal">
+          <p>© {new Date().getFullYear()} <strong>Msdos Informática Ltda</strong> — Todos os direitos reservados.</p>
+          <p>
+            Este sistema trata dados pessoais em conformidade com a{' '}
+            <abbr title="Lei Geral de Proteção de Dados — Lei nº 13.709/2018">LGPD (Lei nº 13.709/2018)</abbr>{' '}
+            e observa os princípios da{' '}
+            <abbr title="Lei de Acesso à Informação — Lei nº 12.527/2011">Lei de Acesso à Informação (Lei nº 12.527/2011)</abbr>.
+          </p>
+        </div>
       </div>
 
     </div>

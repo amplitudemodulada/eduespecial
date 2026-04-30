@@ -60,6 +60,25 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <main className="main-content">
         {children}
       </main>
+
+      <footer style={{
+        borderTop: '1px solid #e5e7eb',
+        background: '#f8fafc',
+        padding: '0.75rem 1.5rem',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        gap: '0.5rem',
+        fontSize: '0.75rem',
+        color: '#9ca3af',
+      }}>
+        <span>© {new Date().getFullYear()} <strong style={{ color: '#6b7280' }}>Msdos Informática Ltda</strong> — Todos os direitos reservados.</span>
+        <span style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap' }}>
+          <span title="Lei Geral de Proteção de Dados — Lei nº 13.709/2018">🔒 LGPD — Lei nº 13.709/2018</span>
+          <span title="Lei de Acesso à Informação — Lei nº 12.527/2011">📄 LAI — Lei nº 12.527/2011</span>
+        </span>
+      </footer>
     </div>
   )
 }
