@@ -54,7 +54,7 @@ export default function LoginPage() {
 
         {error && <div className="login-error">{error}</div>}
 
-        <form className="login-form" onSubmit={handleLogin}>
+        <form className="login-form" onSubmit={handleLogin} autoComplete="off">
           <div className="form-group">
             <label className="form-label">Email</label>
             <input
@@ -62,7 +62,8 @@ export default function LoginPage() {
               className="input"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@escola.com"
+              placeholder="seu@email.com"
+              autoComplete="off"
               required
             />
           </div>
@@ -74,7 +75,8 @@ export default function LoginPage() {
               className="input"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="123456"
+              placeholder="••••••"
+              autoComplete="new-password"
               required
             />
           </div>
