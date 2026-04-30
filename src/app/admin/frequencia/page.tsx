@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import { getAlunos, getFrequencia, saveFrequencia } from '@/lib/demo'
+import { useUser } from '@/lib/useUser'
 
 export default function FrequenciaPage() {
+  const { isDemo } = useUser()
   const [alunos, setAlunos] = useState<any[]>([])
   const [frequencia, setFrequencia] = useState<any[]>([])
   const [dataSelecionada, setDataSelecionada] = useState(new Date().toISOString().split('T')[0])
@@ -70,14 +72,20 @@ export default function FrequenciaPage() {
                     {!status && <span style={{ color: '#aaa', fontSize: '0.85rem' }}>—</span>}
                   </td>
                   <td style={{ padding: '0.75rem 1rem', textAlign: 'center', display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
-                    <button onClick={() => registrar(aluno.id, 'presente')}
-                      style={{ background: status === 'presente' ? '#16a34a' : '#e2e8f0', color: status === 'presente' ? '#fff' : '#333', border: 'none', padding: '0.35rem 0.9rem', borderRadius: 6, cursor: 'pointer', fontWeight: 500 }}>
-                      Presente
-                    </button>
-                    <button onClick={() => registrar(aluno.id, 'ausente')}
-                      style={{ background: status === 'ausente' ? '#dc2626' : '#e2e8f0', color: status === 'ausente' ? '#fff' : '#333', border: 'none', padding: '0.35rem 0.9rem', borderRadius: 6, cursor: 'pointer', fontWeight: 500 }}>
-                      Ausente
-                    </button>
+                    {isDemo ? (
+                      <span style={{ color: '#aaa', fontSize: '0.85rem' }}>somente leitura</span>
+                    ) : (
+                      <>
+                        <button onClick={() => registrar(aluno.id, 'presente')}
+                          style={{ background: status === 'presente' ? '#16a34a' : '#e2e8f0', color: status === 'presente' ? '#fff' : '#333', border: 'none', padding: '0.35rem 0.9rem', borderRadius: 6, cursor: 'pointer', fontWeight: 500 }}>
+                          Presente
+                        </button>
+                        <button onClick={() => registrar(aluno.id, 'ausente')}
+                          style={{ background: status === 'ausente' ? '#dc2626' : '#e2e8f0', color: status === 'ausente' ? '#fff' : '#333', border: 'none', padding: '0.35rem 0.9rem', borderRadius: 6, cursor: 'pointer', fontWeight: 500 }}>
+                          Ausente
+                        </button>
+                      </>
+                    )}
                   </td>
                 </tr>
               )

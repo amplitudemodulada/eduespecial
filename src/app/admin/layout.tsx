@@ -2,6 +2,7 @@
 
 import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import './admin.css'
 
 const menuItems = [
@@ -15,6 +16,12 @@ const menuItems = [
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   const pathname = usePathname()
+  const [isDemo, setIsDemo] = useState(false)
+
+  useEffect(() => {
+    const u = sessionStorage.getItem('user')
+    if (u) setIsDemo(JSON.parse(u).role === 'demo')
+  }, [])
 
   const handleLogout = () => {
     sessionStorage.removeItem('user')
@@ -44,6 +51,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
       </header>
 
+      {isDemo && (
+        <div style={{ background: '#fef9c3', borderBottom: '1px solid #fde047', padding: '0.4rem 1.5rem', fontSize: '0.85rem', color: '#713f12', textAlign: 'center' }}>
+          Modo somente leitura — conta demo
+        </div>
+      )}
       <main className="main-content">
         {children}
       </main>

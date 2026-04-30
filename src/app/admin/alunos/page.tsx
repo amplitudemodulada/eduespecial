@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { getAlunos, saveAluno, deleteAluno, initDemoData } from '@/lib/demo'
+import { useUser } from '@/lib/useUser'
 
 interface Aluno {
   id: string
@@ -39,6 +40,7 @@ const TIPOS_NECESSIDADE = [
 ]
 
 export default function AlunosPage() {
+  const { isDemo } = useUser()
   const [alunos, setAlunos] = useState<Aluno[]>([])
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
@@ -148,9 +150,11 @@ export default function AlunosPage() {
     <div className="alunos-container">
       <div className="flex flex-between mb-3">
         <h1>Alunos</h1>
-        <button className="btn btn-primary" onClick={() => { resetForm(); setShowModal(true) }}>
-          + Novo Aluno
-        </button>
+        {!isDemo && (
+          <button className="btn btn-primary" onClick={() => { resetForm(); setShowModal(true) }}>
+            + Novo Aluno
+          </button>
+        )}
       </div>
 
       <div className="filters mb-3">
@@ -207,15 +211,19 @@ export default function AlunosPage() {
                     </span>
                   </td>
                   <td>
-                    <button className="btn btn-ghost text-sm" onClick={() => editAluno(aluno)}>
-                      Editar
-                    </button>
-                    <button 
-                      className="btn btn-ghost text-sm text-danger" 
-                      onClick={() => removeAluno(aluno.id)}
-                    >
-                      Excluir
-                    </button>
+                    {!isDemo && (
+                      <>
+                        <button className="btn btn-ghost text-sm" onClick={() => editAluno(aluno)}>
+                          Editar
+                        </button>
+                        <button
+                          className="btn btn-ghost text-sm text-danger"
+                          onClick={() => removeAluno(aluno.id)}
+                        >
+                          Excluir
+                        </button>
+                      </>
+                    )}
                   </td>
                 </tr>
               ))}

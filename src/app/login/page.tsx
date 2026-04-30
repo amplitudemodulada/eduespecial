@@ -40,7 +40,7 @@ export default function LoginPage() {
     } else if (user.role === 'responsavel') {
       router.push('/responsavel')
     } else if (user.role === 'demo') {
-      router.push('/demo')
+      router.push('/admin/alunos')
     }
   }
 
