@@ -11,7 +11,8 @@ const menuItems = [
   { href: '/admin/planos', label: 'Planos', icon: '📝' },
   { href: '/admin/relatorios', label: 'Relatórios', icon: '📊' },
   { href: '/admin/comunicados', label: 'Comunicados', icon: '📢' },
-  { href: '/admin/usuarios', label: 'Usuários', icon: '🔑', adminOnly: true },
+  { href: '/admin/usuarios', label: 'Usuários', icon: '👤', adminOnly: true },
+  { href: '/admin/licencas', label: 'Licenças', icon: '🔑', adminOnly: true },
 ]
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
