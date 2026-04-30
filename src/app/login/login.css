@@ -146,8 +146,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 3rem;
+  padding: 2rem 3rem 5rem;
   background: #f8fafc;
+  position: relative;
 }
 
 .login-form-box {
@@ -239,8 +240,11 @@
 .login-footer-note span { font-size: 1.25rem; }
 
 .login-legal {
-  margin-top: 1.5rem;
-  padding-top: 1rem;
+  position: absolute;
+  bottom: 1.25rem;
+  left: 3rem;
+  right: 3rem;
+  padding-top: 0.75rem;
   border-top: 1px solid #e5e7eb;
   font-size: 0.72rem;
   color: #9ca3af;
