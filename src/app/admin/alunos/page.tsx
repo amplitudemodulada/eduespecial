@@ -150,11 +150,10 @@ export default function AlunosPage() {
     <div className="alunos-container">
       <div className="flex flex-between mb-3">
         <h1>Alunos</h1>
-        {!isDemo && (
-          <button className="btn btn-primary" onClick={() => { resetForm(); setShowModal(true) }}>
-            + Novo Aluno
-          </button>
-        )}
+        <button className="btn btn-primary" disabled={isDemo} onClick={() => { resetForm(); setShowModal(true) }}
+          title={isDemo ? 'Somente leitura' : undefined}>
+          + Novo Aluno
+        </button>
       </div>
 
       <div className="filters mb-3">
@@ -211,19 +210,12 @@ export default function AlunosPage() {
                     </span>
                   </td>
                   <td>
-                    {!isDemo && (
-                      <>
-                        <button className="btn btn-ghost text-sm" onClick={() => editAluno(aluno)}>
-                          Editar
-                        </button>
-                        <button
-                          className="btn btn-ghost text-sm text-danger"
-                          onClick={() => removeAluno(aluno.id)}
-                        >
-                          Excluir
-                        </button>
-                      </>
-                    )}
+                    <button className="btn btn-ghost text-sm" disabled={isDemo} onClick={() => editAluno(aluno)} title={isDemo ? 'Somente leitura' : undefined}>
+                      Editar
+                    </button>
+                    <button className="btn btn-ghost text-sm text-danger" disabled={isDemo} onClick={() => removeAluno(aluno.id)} title={isDemo ? 'Somente leitura' : undefined}>
+                      Excluir
+                    </button>
                   </td>
                 </tr>
               ))}

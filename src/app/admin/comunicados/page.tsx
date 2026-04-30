@@ -35,12 +35,10 @@ export default function ComunicadosPage() {
     <div style={{ padding: '1.5rem', maxWidth: 900, margin: '0 auto' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
         <h1 style={{ fontSize: '1.5rem', fontWeight: 700 }}>Comunicados</h1>
-        {!isDemo && (
-          <button onClick={() => setShowForm(!showForm)}
-            style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '0.5rem 1.2rem', borderRadius: 8, cursor: 'pointer', fontWeight: 600 }}>
-            + Novo Comunicado
-          </button>
-        )}
+        <button disabled={isDemo} onClick={() => setShowForm(!showForm)} title={isDemo ? 'Somente leitura' : undefined}
+          style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '0.5rem 1.2rem', borderRadius: 8, cursor: isDemo ? 'not-allowed' : 'pointer', fontWeight: 600, opacity: isDemo ? 0.6 : 1 }}>
+          + Novo Comunicado
+        </button>
       </div>
 
       {showForm && (
@@ -79,7 +77,8 @@ export default function ComunicadosPage() {
                   <p style={{ color: '#555', margin: 0, lineHeight: 1.5 }}>{c.mensagem}</p>
                   <span style={{ color: '#999', fontSize: '0.8rem' }}>{c.data_publicacao}</span>
                 </div>
-                {!isDemo && <button onClick={() => excluir(c.id)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#999', fontSize: '1.2rem', padding: '0 0.5rem' }}>✕</button>}
+                <button disabled={isDemo} onClick={() => excluir(c.id)} title={isDemo ? 'Somente leitura' : undefined}
+                  style={{ background: 'none', border: 'none', cursor: isDemo ? 'not-allowed' : 'pointer', color: '#999', fontSize: '1.2rem', padding: '0 0.5rem', opacity: isDemo ? 0.4 : 1 }}>✕</button>
               </div>
             </div>
           ))}

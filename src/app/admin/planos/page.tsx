@@ -35,12 +35,10 @@ export default function PlanosPage() {
     <div style={{ padding: '1.5rem', maxWidth: 900, margin: '0 auto' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
         <h1 style={{ fontSize: '1.5rem', fontWeight: 700 }}>Planos Individualizados</h1>
-        {!isDemo && (
-          <button onClick={() => setShowForm(!showForm)}
-            style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '0.5rem 1.2rem', borderRadius: 8, cursor: 'pointer', fontWeight: 600 }}>
-            + Novo Plano
-          </button>
-        )}
+        <button disabled={isDemo} onClick={() => setShowForm(!showForm)} title={isDemo ? 'Somente leitura' : undefined}
+          style={{ background: '#3b82f6', color: '#fff', border: 'none', padding: '0.5rem 1.2rem', borderRadius: 8, cursor: isDemo ? 'not-allowed' : 'pointer', fontWeight: 600, opacity: isDemo ? 0.6 : 1 }}>
+          + Novo Plano
+        </button>
       </div>
 
       {showForm && (

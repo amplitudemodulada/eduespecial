@@ -72,20 +72,14 @@ export default function FrequenciaPage() {
                     {!status && <span style={{ color: '#aaa', fontSize: '0.85rem' }}>—</span>}
                   </td>
                   <td style={{ padding: '0.75rem 1rem', textAlign: 'center', display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
-                    {isDemo ? (
-                      <span style={{ color: '#aaa', fontSize: '0.85rem' }}>somente leitura</span>
-                    ) : (
-                      <>
-                        <button onClick={() => registrar(aluno.id, 'presente')}
-                          style={{ background: status === 'presente' ? '#16a34a' : '#e2e8f0', color: status === 'presente' ? '#fff' : '#333', border: 'none', padding: '0.35rem 0.9rem', borderRadius: 6, cursor: 'pointer', fontWeight: 500 }}>
-                          Presente
-                        </button>
-                        <button onClick={() => registrar(aluno.id, 'ausente')}
-                          style={{ background: status === 'ausente' ? '#dc2626' : '#e2e8f0', color: status === 'ausente' ? '#fff' : '#333', border: 'none', padding: '0.35rem 0.9rem', borderRadius: 6, cursor: 'pointer', fontWeight: 500 }}>
-                          Ausente
-                        </button>
-                      </>
-                    )}
+                    <button disabled={isDemo} onClick={() => registrar(aluno.id, 'presente')} title={isDemo ? 'Somente leitura' : undefined}
+                      style={{ background: status === 'presente' ? '#16a34a' : '#e2e8f0', color: status === 'presente' ? '#fff' : '#333', border: 'none', padding: '0.35rem 0.9rem', borderRadius: 6, cursor: isDemo ? 'not-allowed' : 'pointer', fontWeight: 500, opacity: isDemo ? 0.6 : 1 }}>
+                      Presente
+                    </button>
+                    <button disabled={isDemo} onClick={() => registrar(aluno.id, 'ausente')} title={isDemo ? 'Somente leitura' : undefined}
+                      style={{ background: status === 'ausente' ? '#dc2626' : '#e2e8f0', color: status === 'ausente' ? '#fff' : '#333', border: 'none', padding: '0.35rem 0.9rem', borderRadius: 6, cursor: isDemo ? 'not-allowed' : 'pointer', fontWeight: 500, opacity: isDemo ? 0.6 : 1 }}>
+                      Ausente
+                    </button>
                   </td>
                 </tr>
               )
