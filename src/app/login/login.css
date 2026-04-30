@@ -141,18 +141,18 @@
 
 /* ── Lado direito ── */
 .login-right {
-  width: 440px;
+  width: 520px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 2rem 3rem;
   background: #f8fafc;
 }
 
 .login-form-box {
   width: 100%;
-  max-width: 360px;
+  max-width: 420px;
 }
 
 .login-form-title {
