@@ -11,6 +11,7 @@ const menuItems = [
   { href: '/admin/planos', label: 'Planos', icon: '📝' },
   { href: '/admin/relatorios', label: 'Relatórios', icon: '📊' },
   { href: '/admin/comunicados', label: 'Comunicados', icon: '📢' },
+  { href: '/admin/usuarios', label: 'Usuários', icon: '🔑', adminOnly: true },
 ]
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -34,15 +35,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="container header-content">
           <div className="logo">EduEspecial</div>
           <nav className="nav">
-            {menuItems.map(item => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`nav-link ${pathname === item.href ? 'active' : ''}`}
-              >
-                {item.icon} {item.label}
-              </Link>
-            ))}
+            {menuItems.map(item => {
+              if (item.adminOnly && isDemo) return null
+              return (
+                <Link key={item.href} href={item.href} className={`nav-link ${pathname === item.href ? 'active' : ''}`}>
+                  {item.icon} {item.label}
+                </Link>
+              )
+            })}
           </nav>
           <Link href="/perfil" className="btn btn-ghost">Meu Perfil</Link>
           <button className="btn btn-ghost" onClick={handleLogout}>
