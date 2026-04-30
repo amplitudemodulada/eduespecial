@@ -145,28 +145,30 @@
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 2rem 3rem 5rem;
+  justify-content: flex-start;
+  padding: 3rem 3rem 5rem;
   background: #f8fafc;
   position: relative;
+  overflow-y: auto;
 }
 
 .login-form-box {
   width: 100%;
   max-width: 420px;
+  margin-top: 2rem;
 }
 
 .login-form-title {
   font-size: 1.75rem;
   font-weight: 800;
   color: #1e1b4b;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.25rem;
 }
 
 .login-form-subtitle {
   color: #6b7280;
   font-size: 0.95rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .login-field {
@@ -241,13 +243,13 @@
 
 .login-legal {
   position: absolute;
-  bottom: 1.25rem;
+  bottom: 1rem;
   left: 3rem;
   right: 3rem;
-  padding-top: 0.75rem;
+  padding-top: 0.6rem;
   border-top: 1px solid #e5e7eb;
-  font-size: 0.72rem;
-  color: #9ca3af;
+  font-size: 0.68rem;
+  color: #b0b7c3;
   text-align: center;
   line-height: 1.6;
 }
