@@ -37,6 +37,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               </Link>
             ))}
           </nav>
+          <Link href="/perfil" className="btn btn-ghost">Meu Perfil</Link>
           <button className="btn btn-ghost" onClick={handleLogout}>
             Sair
           </button>
