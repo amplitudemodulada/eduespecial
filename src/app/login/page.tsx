@@ -84,12 +84,6 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <div className="login-footer">
-          <p><strong>Contas demo:</strong></p>
-          <p>admin@escola.com / 123456</p>
-          <p>professor@escola.com / 123456</p>
-          <p>demo@escola.com / 123456</p>
-        </div>
       </div>
     </div>
   )
