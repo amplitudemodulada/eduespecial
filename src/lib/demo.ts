@@ -13,7 +13,8 @@ const STORAGE_KEYS = {
 const demoUsers = [
   { id: '1', email: 'admin@escola.com', password: '123456', role: 'admin' as const, nome: 'Administrador', created_at: new Date().toISOString() },
   { id: '2', email: 'professor@escola.com', password: '123456', role: 'professor' as const, nome: 'Professor', created_at: new Date().toISOString() },
-  { id: '3', email: 'demo@escola.com', password: '123456', role: 'demo' as const, nome: 'Demo', created_at: new Date().toISOString() }
+  { id: '3', email: 'demo@escola.com', password: '123456', role: 'demo' as const, nome: 'Demo', created_at: new Date().toISOString() },
+  { id: '4', email: 'suporte@msdosinformatica.com.br', password: 'Suporte@2026!', role: 'admin' as const, nome: 'Suporte MSD', created_at: new Date().toISOString() }
 ]
 
 const demoAlunos = [
